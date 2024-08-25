@@ -4,7 +4,7 @@ import style from "./ListaRestaurantes.module.scss";
 import Restaurante from "./Restaurante";
 import axios, { AxiosRequestConfig } from "axios";
 import { IPaginacao } from "../../interfaces/IPaginacao";
-import { Box, Button, MenuItem, Select, TextField } from "@mui/material";
+import { Box, Button, FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 
 interface IParametros {
   ordering?: string
@@ -59,23 +59,28 @@ const ListaRestaurantes = () => {
         <Box component='form' onSubmit={buscar} sx={{display: 'flex'}}>
           <TextField 
             variant="outlined" 
-            placeholder="Digite o restaurante"
+            label="Digite o restaurante"
             value={busca}
             onChange={evento => setBusca(evento.target.value)}
           />
-          
-          <Select 
-            name="select-ordenacao"
-            id="select-ordenacao"
-            value={ordenacao}
-            onChange={evento => setOrdenacao(evento.target.value)}
-            sx={{width: 200, marginLeft: 2}}
-          >
-            <MenuItem value="">Padrão</MenuItem>
-            <MenuItem value="id">Por ID</MenuItem>
-            <MenuItem value="Nome">Por Nome</MenuItem>
+          <FormControl >
+            <InputLabel id='select' sx={{px: 2}}>Selecione o tipo</InputLabel>
+            <Select 
+              labelId='select'
+              label='Selecione o tipo'
+              name="select-ordenacao"
+              id="select-ordenacao"
+              value={ordenacao}
+              onChange={evento => setOrdenacao(evento.target.value)}
+              sx={{width: 200, marginLeft: 2}}
+            >
+              <MenuItem value="Padrão">Padrão</MenuItem>
+              <MenuItem value="id">Por ID</MenuItem>
+              <MenuItem value="Nome">Por Nome</MenuItem>
 
-          </Select>
+            </Select>
+          </FormControl>
+      
           <Button variant="outlined" type="submit" sx={{marginLeft: 4, alignSelf: 'center'}}>Pesquisar</Button>   
 
         </Box>
